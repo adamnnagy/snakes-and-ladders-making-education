@@ -4,6 +4,8 @@ const int button2 = 4;
 const int ladderFader = 3;
 const int ladderSwitch1 = 5;
 const int ladderSwitch2 = 6;
+const int snakeSwitch1 = 7;
+
 
 
 int fadeValue = 0;
@@ -24,11 +26,12 @@ int lastButtonState2 = 0;
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
-  pinMode(button1, INPUT);
+  pinMode(button1, INPUT); 
   pinMode(button2, INPUT);
   pinMode(ladderFader, OUTPUT);
   pinMode(ladderSwitch1, OUTPUT);
   pinMode(ladderSwitch2, OUTPUT);
+  pinMode(snakeSwitch1, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -58,7 +61,7 @@ void loop() {
   if (button1Counter % 2 == 1) {digitalWrite(ladderSwitch1, HIGH);}
   else{digitalWrite(ladderSwitch1, LOW);}
 
-  //button 2 controls ladder 2  
+  //button 2 controls ladder 2 and snake 1
   if (buttonState2 != lastButtonState2) {
   if (buttonState2 == HIGH) {
     button2Counter++;
@@ -69,9 +72,9 @@ void loop() {
  }
  //avoiding bouncing
  lastButtonState2 = buttonState2;
- //change ladder 2 state
-  if (button2Counter % 2 == 1) {digitalWrite(ladderSwitch2, HIGH);}
-  else{digitalWrite(ladderSwitch2, LOW);}
+ //change ladder 2 state and snake 1 state
+  if (button2Counter % 2 == 1) {digitalWrite(ladderSwitch2, HIGH); digitalWrite(snakeSwitch1, LOW);}
+  else{digitalWrite(ladderSwitch2, LOW); digitalWrite(snakeSwitch1, HIGH);}
 
 //end
 }
