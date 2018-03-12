@@ -26,7 +26,9 @@ const int button1 = 2;
 const int button2 = 4;
 const int ladderFader = 3;
 const int ladderSwitch = 5;
-int sliderValue; 
+
+int fadeValue = 0;
+int sliderValue = 0; 
 
 
 //button 1 setup
@@ -54,7 +56,14 @@ void loop() {
   buttonState2 = digitalRead(button2);
   sliderValue = analogRead(A0);
 
+
  Serial.println(sliderValue);
+
+  fadeValue = map(sliderValue, 0, 1023, 0, 255);
+
+  analogWrite(ladderFader, fadeValue);
+ 
+ delay(100);
 
  if (buttonState1 != lastButtonState1) {
 
@@ -71,15 +80,8 @@ void loop() {
  }
  lastButtonState1 = buttonState1;
    
-  if (button1Counter % 2 == 1) {
-  digitalWrite(ladderSwitch, HIGH);
- 
-} 
-
-  if (button1Counter % 2 == 0) {
-    digitalWrite(ladderSwitch, LOW);
-    
-    }
+  if (button1Counter % 2 == 1) {digitalWrite(ladderSwitch, HIGH);}
+  else{digitalWrite(ladderSwitch, LOW);}
 
     
   }
