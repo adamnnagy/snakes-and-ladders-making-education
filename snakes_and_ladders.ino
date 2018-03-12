@@ -1,3 +1,7 @@
+/* created by Adam Nagy for Karkhana
+12 March 2018. 
+Interactive Snakes and Ladders game */ 
+
 //pin declarations
 const int button1 = 2;
 const int button2 = 4;
